@@ -8,10 +8,10 @@ router.get('/users', async (req, res) => {
         res.status(200).json(users)
 
     }
-    catch (err) {
-        res.status(500).send(err.message)
+    catch (error) {
+        res.status(500).send(error.message)
     }
-})
+});
 
 router.post('/create', async (req, res) => {
     try {
@@ -26,7 +26,19 @@ router.post('/create', async (req, res) => {
     catch (err) {
         res.status(500).send(err.message)
     }
+});
 
+router.delete('/user/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const deletUser = await User.destroy({
+            where: {id: id}
+        })
+        res.status(200).json(deletUser)
+    }
+    catch (err) {
+        res.status(500).send(err)
+    }
 })
 
 module.exports = router
