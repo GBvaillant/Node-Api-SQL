@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const sequelize = new Sequelize(
-    'postdb',
+    'dbprod',
      process.env.USER_DB, 
      process.env.PASSWORD_DB,
     {

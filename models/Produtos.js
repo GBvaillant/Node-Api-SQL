@@ -1,20 +1,20 @@
 const db = require('./db')
 
-const User = db.sequelize.define('usuarios', {
+const Produto = db.sequelize.define('produtos', {
     nome: {
         type: db.Sequelize.STRING
     },
-    email: {
+    preco: {
         type: db.Sequelize.STRING
     },
-    cidade: {
+    codigo: {
         type: db.Sequelize.STRING
     },
-    cpf: {
+    quantidade: {
         type: db.Sequelize.STRING
     }
 })
 
-// User.sync({ force: true })
+//Produto.sync({ force: true })
 
-module.exports = User 
+module.exports = Produto

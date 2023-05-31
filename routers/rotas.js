@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/User')
+const Produto = require('../models/Produtos');
+const { json } = require('sequelize');
 
-router.get('/users', async (req, res) => {
+router.get('/produtos', async (req, res) => {
     try {
-        const users = await User.findAll()
+        const users = await Produto.findAll()
         res.status(200).json(users)
+
 
     }
     catch (error) {
@@ -15,26 +17,39 @@ router.get('/users', async (req, res) => {
 
 router.post('/create', async (req, res) => {
     try {
-        const newUser = await User.create({
+        const newProd = await Produto.create({
             nome: req.body.nome,
-            email: req.body.email,
-            cidade: req.body.cidade,
-            cpf: req.body.cpf
+            preco: req.body.preco,
+            codigo: req.body.codigo,
+            quantidade: req.body.quantidade
         })
-        res.status(200).json(newUser)
+        res.status(200).json(newProd)
     }
     catch (err) {
         res.status(500).send(err.message)
     }
 });
 
-router.delete('/user/:id', async (req, res) => {
+router.delete('/prod/:id', async (req, res) => {
     try {
         const id = req.params.id
-        const deletUser = await User.destroy({
-            where: {id: id}
+        const deletProd = await User.destroy({
+            where: { id: id }
         })
-        res.status(200).json(deletUser)
+        res.status(200).json(deletProd)
+    }
+    catch (err) {
+        res.status(500).send(err)
+    }
+});
+
+router.patch('/prod/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const editProd = await User.update(
+            { were: { id: id } }
+        )
+        res.status(200).json(editProd)
     }
     catch (err) {
         res.status(500).send(err)
